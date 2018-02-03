@@ -1,20 +1,11 @@
 const router=require('express').Router();
 
 
-//auth login
 
-router.get('/login',(req,res)=>{
-    res.render('login');
-});
-
-router.get('/logout',(req,res)=>{
-    res.send('logging out...');
-})
-
-router.get('/google',(req,res)=>{
-    res.render('login');
-});
-
+        router.get('/login', function(req, res, next) {
+            console.log(__dirname);
+         res.render('login', { title: 'Express template test ' , layout: "../views/layout.ejs"}); // Specify layout file for different page (e.g about-us , dashboard )
+        });
 
 
 module.exports=router;

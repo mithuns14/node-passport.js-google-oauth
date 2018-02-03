@@ -3,9 +3,12 @@ const authRoutes=require('./routes/auth.route');
 const expressLayout=require("express-ejs-layouts");
 const path = require('path');
 const bodyParser = require('body-parser');
+const passportSetup=require('./config/passport-setup');
+const mongoose=require('mongoose');
+const keys=require('./config/keys');
 
 const app=express();
-const port=3000;
+const port=4000;
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/images'));
@@ -19,6 +22,10 @@ app.use('/auth',authRoutes);
 
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine','ejs');
+
+mongoose.connect(keys.mongodb.dbURI,(err,data)=>{
+    console.log('Connected to MongoDB');
+})
 
 
 app.get('/', function(req, res, next) {
@@ -37,7 +44,7 @@ app.get('/', function(req, res, next) {
 //     res.render('users', { title: 'Express template test ' , layout: "layout.ejs"}); // Specify layout file for different page (e.g about-us , dashboard )
 //    });
 
-app.listen(port,()=>{
+app.listen(process.env.PORT || port,()=>{
     console.log('App listening on ',port);
 });
 

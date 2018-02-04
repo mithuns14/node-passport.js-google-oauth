@@ -13,6 +13,8 @@ passport.deserializeUser((id,done)=>{
     });    
 });
 
+//callbackURL:'/auth/google/redirect', local
+
 passport.use(new GoogleStrategy({
 //options for google strategy
 callbackURL:'/auth/google/redirect',
